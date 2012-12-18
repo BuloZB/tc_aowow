@@ -185,7 +185,6 @@ function GetFlagsDetails($data)
 
     // Наличие стартовых и финишных скриптов
     if ($data['PointX'] || $data['PointY']) $result[] = LOCALE_QUEST_HAS_POI;
-    if ($data['StartScript'])               $result[] = LOCALE_QUEST_HAS_START_SCRIPT;
     if ($data['CompleteScript'])            $result[] = LOCALE_QUEST_HAS_COMPLETE_SCRIPT;
 
     return $result;
