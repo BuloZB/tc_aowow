@@ -405,28 +405,6 @@ function GetDBQuestInfo($id, $dataflag = QUEST_DATAFLAG_MINIMUM)
 function GetQuestInfo(&$data, $dataflag = QUEST_DATAFLAG_MINIMUM)
 {
     global $DB, $quest_class, $quest_faction_reward;
-    /*else
-    {
-        $data = $DB->selectRow('
-                SELECT
-                    1
-                    {, ?# } {, ?# } {, ?# } {, ?# } {, ?# }
-                FROM v_quest_template
-                WHERE entry=?d
-                LIMIT 1
-            ',
-            ($dataflag & QUEST_DATAFLAG_MINIMUM)?$questcols[QUEST_DATAFLAG_MINIMUM]:DBSIMPLE_SKIP,
-            ($dataflag & QUEST_DATAFLAG_STRINGS)?$questcols[QUEST_DATAFLAG_STRINGS]:DBSIMPLE_SKIP,
-            ($dataflag & QUEST_DATAFLAG_SERIES) ?$questcols[QUEST_DATAFLAG_SERIES] :DBSIMPLE_SKIP,
-            ($dataflag & QUEST_DATAFLAG_PROPS)  ?$questcols[QUEST_DATAFLAG_PROPS]  :DBSIMPLE_SKIP,
-            ($dataflag & QUEST_DATAFLAG_REWARDS)?$questcols[QUEST_DATAFLAG_REWARDS]:DBSIMPLE_SKIP,
-            $data['entry']
-        );
-    }
-    if(!$data)
-    {
-        return false;
-    }*/
 
     // Локализация
     if($dataflag & QUEST_DATAFLAG_LOCALE && $_SESSION['locale'] > 0)
@@ -449,7 +427,7 @@ function GetQuestInfo(&$data, $dataflag = QUEST_DATAFLAG_MINIMUM)
                 LIMIT 1
             ',
             $loc, $loc, $loc, $loc, $loc, $loc, $loc, $loc, $loc, $loc,
-            $data['entry']
+            $data['Id']
         );
 
         if($row)
