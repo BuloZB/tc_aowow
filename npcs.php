@@ -22,7 +22,7 @@ if(!$npcs = load_cache(NPC_LISTING, $cache_key))
 		FROM ?_factiontemplate, creature_template c
 		{ LEFT JOIN (locales_creature l) ON l.entry=c.entry AND ? }
 		WHERE
-			factiontemplateID=faction_A
+			factiontemplateID=faction
 			{AND type=?}
 		ORDER BY minlevel DESC, name
 		{LIMIT ?d}
