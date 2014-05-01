@@ -290,7 +290,7 @@ if(!$spell = load_cache(SPELL_PAGE, $cache_key))
 				{ LEFT JOIN (locales_creature l) ON c.entry = l.entry AND ? }
 				WHERE
 					c.entry IN (?a)
-					AND factiontemplateID=faction_A
+					AND factiontemplateID=faction
 				',
 				$npc_cols[0],
 				($_SESSION['locale']>0)? $_SESSION['locale']: DBSIMPLE_SKIP,
@@ -351,7 +351,7 @@ if(!$spell = load_cache(SPELL_PAGE, $cache_key))
 				{ LEFT JOIN (locales_creature l) ON c.entry = l.entry AND ? }
 				WHERE
 					c.entry IN (SELECT entry FROM petcreateinfo_spell WHERE (Spell1 IN (?a)) OR (Spell2 IN (?a)) OR (Spell3 IN (?a)) OR (Spell4 IN (?a)))
-					AND factiontemplateID=faction_A
+					AND factiontemplateID=faction
 				',
 				$npc_cols[0],
 				($_SESSION['locale']>0)? $_SESSION['locale']: DBSIMPLE_SKIP,
@@ -397,7 +397,7 @@ if(!$spell = load_cache(SPELL_PAGE, $cache_key))
 				{ LEFT JOIN (locales_creature l) ON c.entry = l.entry AND ? }
 				WHERE
 					c.entry IN (SELECT entry FROM npc_trainer WHERE spell in (?a))
-					AND factiontemplateID=faction_A
+					AND factiontemplateID=faction
 				',
 				$npc_cols[0],
 				($_SESSION['locale']>0)? $_SESSION['locale']: DBSIMPLE_SKIP,
@@ -449,7 +449,7 @@ if(!$spell = load_cache(SPELL_PAGE, $cache_key))
 				OR spell2 = ?d
 				OR spell3 = ?d
 				OR spell4 = ?d)
-				AND factiontemplateID=faction_A
+				AND factiontemplateID=faction
 			',
 			$npc_cols[0],
 			($_SESSION['locale']>0)? $_SESSION['locale']: DBSIMPLE_SKIP,
