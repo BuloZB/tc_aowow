@@ -40,7 +40,7 @@ if(!$item = load_cache(ITEM_PAGE, $cache_key))
 				{ LEFT JOIN (locales_creature l) ON l.entry=c.entry AND ? }
 				WHERE
 					lootid=?d
-					AND factiontemplateID=faction_A
+					AND factiontemplateID=faction
 				',
 				$npc_cols[0],
 				($_SESSION['locale']>0)? $_SESSION['locale']: DBSIMPLE_SKIP,
@@ -118,7 +118,7 @@ if(!$item = load_cache(ITEM_PAGE, $cache_key))
 			WHERE
 				v.item=?d
 				AND c.entry=v.entry
-				AND factiontemplateID=faction_A
+				AND factiontemplateID=faction
 			ORDER BY 1 DESC, 2 DESC
 		',
 		$npc_cols['0'],
@@ -313,7 +313,7 @@ if(!$item = load_cache(ITEM_PAGE, $cache_key))
 					{ LEFT JOIN (locales_creature l) ON l.entry=c.entry AND ? }
 					WHERE
 						pickpocketloot=?d
-						AND factiontemplateID=faction_A
+						AND factiontemplateID=faction
 				',
 				$npc_cols[0],
 				($_SESSION['locale']>0)? $_SESSION['locale']: DBSIMPLE_SKIP,
@@ -347,7 +347,7 @@ if(!$item = load_cache(ITEM_PAGE, $cache_key))
 					{ LEFT JOIN (locales_creature l) ON l.entry=c.entry AND ? }
 					WHERE
 						skinloot=?d
-						AND factiontemplateID=faction_A
+						AND factiontemplateID=faction
 				',
 				$npc_cols[0],
 				($_SESSION['locale']>0)? $_SESSION['locale']: DBSIMPLE_SKIP,
