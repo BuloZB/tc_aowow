@@ -44,7 +44,7 @@ if(!$npc = load_cache(NPC_PAGE, $cache_key))
 		}
 		WHERE
 			c.entry = ?
-			AND ft.factiontemplateID = c.faction_A
+			AND ft.factiontemplateID = c.faction
 			AND f.factionID = ft.factionID
 		LIMIT 1
 			',
