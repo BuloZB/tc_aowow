@@ -98,7 +98,7 @@ if(!$found = load_cache(SEARCH, $cache_key))
 				(name LIKE ?
 				OR subname LIKE ?
 				{OR c.entry IN (?a)})
-				AND factiontemplateID=faction_A
+				AND factiontemplateID=faction
 			LIMIT '.$AoWoWconf["limit"].'
 		',
 		$npc_cols[0],
