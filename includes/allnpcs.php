@@ -42,7 +42,7 @@ function creatureinfo2 ( $Row )
             $type = LOCALE_NPCTYPE_BEAST;
             break;
         case 2:
-            $type = LOCALE_NPCTYPE_DRANGONKIN;
+            $type = LOCALE_NPCTYPE_DRAGONKIN;
             break;
         case 3:
             $type = LOCALE_NPCTYPE_DEMON;
