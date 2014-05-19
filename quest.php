@@ -366,8 +366,8 @@ if(!$quest = load_cache(QUEST_PAGE, $cache_key))
 	if($quest['RepObjectiveFaction']>0)
 	{
 		$quest['factionreq'] = array(
-			'name' => $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM ?_factions WHERE factionID=?d LIMIT 1', $quest['RepObjectiveFaction']),
-			'entry' => $quest['RepObjectiveFaction'],
+			'name' => $DB->selectCell('SELECT name_loc'.$_SESSION['locale'].' FROM ?_factions WHERE factionID=?d LIMIT 1', $quest['RequiredFactionId1']),
+			'entry' => $quest['RequiredFactionId1'],
 			'value' => reputations($quest['RepObjectiveValue'])
 		);
 	}
