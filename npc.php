@@ -66,7 +66,7 @@ if(!$npc = load_cache(NPC_PAGE, $cache_key))
 		}
 		$npc['mindmg'] = round(($row['mindmg'] + $row['attackpower']) * $row['dmg_multiplier']);
 		$npc['maxdmg'] = round(($row['maxdmg'] + $row['attackpower']) * $row['dmg_multiplier']);
-		
+
 		$toDiv = array('minhealth', 'maxmana', 'minmana', 'maxhealth', 'armor', 'mindmg', 'maxdmg');
 		// Разделяем на тысячи (ххххххххх => ххх,ххх,ххх)
 		foreach($toDiv as $e)
@@ -90,7 +90,7 @@ if(!$npc = load_cache(NPC_PAGE, $cache_key))
 					'entry'	=> $tmp['entry'],
 					'name'	=> str_replace(LOCALE_HEROIC, '', $tmp['name'])
 				);
-				
+
 				unset($tmp);
 			}
 		}
@@ -149,7 +149,7 @@ if(!$npc = load_cache(NPC_PAGE, $cache_key))
 		}
 		for($j=1;$j<4;$j++)
 		{
-			$tmp2 = $DB->select('
+/*			$tmp2 = $DB->select('
 				SELECT action?d_param1
 				FROM creature_ai_scripts
 				WHERE
@@ -159,7 +159,7 @@ if(!$npc = load_cache(NPC_PAGE, $cache_key))
 				$j,
 				$npc['entry'],
 				$j
-			);
+			); */
 			if($tmp2)
 				foreach($tmp2 as $i=>$tmp3)
 					if(!in_array($tmp2[$i]['action'.$j.'_param1'], $tmp))
@@ -308,7 +308,7 @@ if(!$npc = load_cache(NPC_PAGE, $cache_key))
 		$rows_qs = $DB->select('
                 	SELECT q.?#
                 FROM quest_template q
-                LEFT JOIN creature_questrelation c on q.id = c.quest
+                LEFT JOIN creature_queststarter c on q.id = c.quest
                 WHERE
                     c.id=?
              	',
@@ -340,7 +340,7 @@ if(!$npc = load_cache(NPC_PAGE, $cache_key))
 $rows_qe = $DB->select('
         SELECT q.?#
         FROM quest_template q
-        LEFT JOIN creature_involvedrelation c on q.id = c.quest
+        LEFT JOIN creature_questender c on q.id = c.quest
         WHERE
                 c.id=?
         ',
@@ -458,3 +458,4 @@ $smarty->assign('mysql', $DB->getStatistics());
 $smarty->display('npc.tpl');
 
 ?>
+
