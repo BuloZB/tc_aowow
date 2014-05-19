@@ -352,16 +352,16 @@
 <script type="text/javascript">ge('iconlist-icon-src').appendChild(g_items.createIcon({$quest.SourceItemId.entry}, 0, {$quest.SourceItemId.SourceItemCount}));</script>
 {/if}
 
-{if isset($quest.SrcSpell) and $quest.SrcSpell}
+{if isset($quest.SourceSpell) and $quest.SourceSpell}
 <div class="pad"></div>
 {#The_following_spell_will_be_cast_on_you#}:
 <table class="icontab">
 	<tr>
 		<th align="right" id="icontab-icon-spl"></th>
-		<td><span class="q1"><a href="?spell={$quest.SrcSpell.entry}">{$quest.SrcSpell.name}</a></span></td>
+		<td><span class="q1"><a href="?spell={$quest.SourceSpell.entry}">{$quest.SourceSpell.name}</a></span></td>
 	</tr>
 </table>
-<script type="text/javascript">ge('icontab-icon-spl').appendChild(g_spells.createIcon({$quest.SrcSpell.entry}, 0, 0));</script>
+<script type="text/javascript">ge('icontab-icon-spl').appendChild(g_spells.createIcon({$quest.SourceSpell.entry}, 0, 0));</script>
 {/if}
 
 {if $quest.Details}
@@ -466,7 +466,7 @@
 						{$quest.OfferRewardText}
 {/if}
 
-{if isset($quest.xp) and $quest.xp or isset($quest.reprewards) or isset($quest.titlereward) or isset($quest.mailrewards) or isset($quest.RewHonorAddition) and $quest.RewHonorAddition}
+{if isset($quest.xp) and $quest.xp or isset($quest.reprewards) or isset($quest.titlereward) or isset($quest.mailrewards) or isset($quest.RewardHonorAddition) and $quest.RewardHonorAddition}
 					<h3>{#Gains#}</h3>
 					{#Upon_completion_of_this_quest_you_will_gain#}:
 					<ul>{strip}
@@ -487,8 +487,8 @@
 {if isset($quest.titlereward)}
 						<li><div>{#the_title#} "{$quest.titlereward|replace:"%s":"&lt;name&gt;"}"</div></li>
 {/if}
-{if isset($quest.RewHonorAddition) and $quest.RewHonorAddition}
-						<li><div>{$quest.RewHonorAddition} {#Honorable_Kills#}</div></li>
+{if isset($quest.RewardHonorAddition) and $quest.RewardHonorAddition}
+						<li><div>{$quest.RewardHonorAddition} {#Honorable_Kills#}</div></li>
 {/if}
 {if isset($quest.mailrewards)}
 						<li><div>{#Mail_delivery#}
