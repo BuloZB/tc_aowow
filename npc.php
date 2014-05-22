@@ -446,7 +446,7 @@ $smarty->assign('page', $page);
 $smarty->assign('comments', getcomments($page['type'], $page['typeid']));
 $smarty->assign('screenshots', getscreenshots($page['type'], $page['typeid']));
 
-if($_GET['error']==2){
+if(@$_GET['error']==2){
 $smarty->assign('screenshot_error', $smarty->get_config_vars('Error2'));
 };
 $smarty->assign('npc', $npc);
