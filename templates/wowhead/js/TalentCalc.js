@@ -1981,7 +1981,8 @@ function TalentCalc() {
 				} else {
 					bd.border.style.backgroundPosition = "0 0";
 					//Icon.moveTexture(bd.icon, 1, be, 1);
-					Icon.setTexture(bd.icon, 1, "cache/images/"+ bd.iconname.toLowerCase()+".jpg");
+					//Elias: Quitamos la ruta de cache y el .jpg
+					Icon.setTexture(bd.icon, 1, bd.iconname.toLowerCase());
 					bd.link.className = "";
 					bd.bubble.style.visibility = "hidden";
 					if (bd.r) {
