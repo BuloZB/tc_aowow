@@ -256,7 +256,7 @@ if(!$quest = load_cache(QUEST_PAGE, $cache_key))
 	// Хранить в базе все локализации - задачка на будующее
 
 	// Спелл, кастуемый на игрока в начале квеста
-	if($quest['SourceSpell'])
+	if($quest['SourceSpellId'])
 	{
 		$tmp = $DB->selectRow('
 			SELECT ?#, s.spellname_loc'.$_SESSION['locale'].'
@@ -266,11 +266,11 @@ if(!$quest = load_cache(QUEST_PAGE, $cache_key))
 				AND si.id=s.spellicon
 			LIMIT 1',
 			$spell_cols[0],
-			$quest['SourceSpell']
+			$quest['SourceSpellId']
 		);
 		if($tmp)
 		{
-			$quest['SourceSpell'] = array(
+			$quest['SourceSpellId'] = array(
 				'name' => $tmp['spellname_loc'.$_SESSION['locale']],
 				'entry' => $tmp['spellID']);
 			allspellsinfo2($tmp);
@@ -342,11 +342,11 @@ if(!$quest = load_cache(QUEST_PAGE, $cache_key))
 			// Количество
 			$quest['coreqs'][$i]['count'] = $quest['RequiredNpcOrGoCount'.$i];
 			// Спелл
-			if($quest['RequiredSpellCast'.$i])
+			/* if($quest['RequiredSpellCast'.$i])
 				$quest['coreqs'][$i]['spell'] = array(
 					'name' => $DB->selectCell('SELECT spellname_loc'.$_SESSION['locale'].' FROM ?_spell WHERE spellid=?d LIMIT 1', $quest['RequiredSpellCast'.$i]),
 					'entry' => $quest['RequiredSpellCast'.$i]
-				);
+				); */
 		}
 	}
 	if(!$quest['coreqs'])
