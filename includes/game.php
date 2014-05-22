@@ -34,7 +34,7 @@ function loot($table, $lootid, $group = 0)
 		($_SESSION['locale'])? 1: DBSIMPLE_SKIP,
 		$lootid,
 		$group ? $group : DBSIMPLE_SKIP,
-		($AoWoWconf['limit']!=0)? $AoWoWconf['limit']: DBSIMPLE_SKIP
+		@($AoWoWconf['limit']!=0)? $AoWoWconf['limit']: DBSIMPLE_SKIP
 	);
 
 	// Подсчитываем нужную информацию о группах

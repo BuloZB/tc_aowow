@@ -12,6 +12,10 @@ require_once('includes/allscreenshots.php');
 // Загружаем файл перевода для smarty
 $smarty->config_load($conf_file, 'item');
 
+error_reporting(E_ALL);
+ini_set('error_reporting', E_ALL);
+
+
 $id = intval($podrazdel);
 
 $cache_key = cache_key($id);
@@ -49,7 +53,7 @@ if(!$item = load_cache(ITEM_PAGE, $cache_key))
 				$lootid
 			);
 			foreach($rows as $row)
-				$item['droppedby'][] = array_merge(creatureinfo2($row), $drop);
+				$item['droppedby'][] = @array_merge(creatureinfo2($row), $drop);
 		}
 		unset($rows);
 		unset($lootid);
@@ -85,13 +89,13 @@ if(!$item = load_cache(ITEM_PAGE, $cache_key))
 			{
 				// Залежи руды
 				if($row['lockproperties1'] == LOCK_PROPERTIES_MINING)
-					$item['minedfromobject'][] = array_merge(objectinfo2($row), $drop);
+					$item['minedfromobject'][] = @array_merge(objectinfo2($row), $drop);
 				// Собирается с трав
 				elseif($row['lockproperties1'] == LOCK_PROPERTIES_HERBALISM)
-					$item['gatheredfromobject'][] = array_merge(objectinfo2($row), $drop);
+					$item['gatheredfromobject'][] = @array_merge(objectinfo2($row), $drop);
 				// Сундуки
 				else
-					$item['containedinobject'][] = array_merge(objectinfo2($row), $drop);
+					$item['containedinobject'][] = @array_merge(objectinfo2($row), $drop);
 			}
 		}
 
@@ -162,7 +166,7 @@ if(!$item = load_cache(ITEM_PAGE, $cache_key))
 	$rows_qr = $DB->select('
 			SELECT q.?# {, l.Title_loc?d AS Title_loc}
 			FROM quest_template q
-			{ LEFT JOIN (locales_quest l) ON l.entry=q.Id AND ? }
+			{ LEFT JOIN (locales_quest l) ON l.Id=q.Id AND ? }
 			WHERE
 				RequiredItemId1=?d
 				OR RequiredItemId2=?d
@@ -186,7 +190,7 @@ if(!$item = load_cache(ITEM_PAGE, $cache_key))
 	$rows_qp = $DB->select('
 			SELECT q.?# {, l.Title_loc?d AS Title_loc}
 			FROM quest_template q
-			{ LEFT JOIN (locales_quest l) ON l.entry=q.Id AND ? }
+			{ LEFT JOIN (locales_quest l) ON l.Id=q.Id AND ? }
 			WHERE SourceItemId=?d
 		',
 		$quest_cols[2],
@@ -206,7 +210,7 @@ if(!$item = load_cache(ITEM_PAGE, $cache_key))
 	$rows_qrw = $DB->select('
 			SELECT q.?# {, l.Title_loc?d AS Title_loc}
 			FROM quest_template q 
-			{ LEFT JOIN (locales_quest l) ON l.entry=q.Id AND ? }
+			{ LEFT JOIN (locales_quest l) ON l.Id=q.Id AND ? }
 			WHERE
 				RewardItemId1=?d
 				OR RewardItemId2=?d
@@ -242,7 +246,7 @@ if(!$item = load_cache(ITEM_PAGE, $cache_key))
 			$rows_qm = $DB->select('
 					SELECT q.?# {, l.Title_loc?d AS Title_loc}
 					FROM quest_template q
-					{ LEFT JOIN (locales_quest l) ON l.entry=q.Id AND ? }
+					{ LEFT JOIN (locales_quest l) ON l.Id=q.Id AND ? }
 					WHERE RewardMailTemplateId=?d
 				',
 				$quest_cols[2],
@@ -284,7 +288,7 @@ if(!$item = load_cache(ITEM_PAGE, $cache_key))
 				$lootid
 			);
 			foreach($rows as $row)
-				$item['containedinitem'][] = array_merge(iteminfo2($row, 0), $drop);
+				$item['containedinitem'][] = @array_merge(iteminfo2($row, 0), $drop);
 		}
 		unset($drops_cii);
 		unset($rows);
@@ -322,7 +326,7 @@ if(!$item = load_cache(ITEM_PAGE, $cache_key))
 				$lootid
 			);
 			foreach($rows as $row)
-				$item['pickpocketingloot'][] = array_merge(creatureinfo2($row), $drop);
+				$item['pickpocketingloot'][] = @array_merge(creatureinfo2($row), $drop);
 		}
 		unset($rows);
 		unset($lootid);
@@ -356,7 +360,7 @@ if(!$item = load_cache(ITEM_PAGE, $cache_key))
 				$lootid
 			);
 			foreach($rows as $row)
-				$item['skinnedfrom'][] = array_merge(creatureinfo2($row), $drop);
+				$item['skinnedfrom'][] = @array_merge(creatureinfo2($row), $drop);
 		}
 		unset($rows);
 		unset($lootid);
@@ -392,7 +396,7 @@ if(!$item = load_cache(ITEM_PAGE, $cache_key))
 				$lootid
 			);
 			foreach($rows as $row)
-				$item['prospectingloot'][] = array_merge(iteminfo2($row, 0), $drop);
+				$item['prospectingloot'][] = @array_merge(iteminfo2($row, 0), $drop);
 		}
 		unset($rows);
 		unset($lootid);
@@ -428,7 +432,7 @@ if(!$item = load_cache(ITEM_PAGE, $cache_key))
 				$lootid
 			);
 			foreach($rows as $row)
-				$item['disenchantedfrom'][] = array_merge(iteminfo2($row, 0), $drop);
+				$item['disenchantedfrom'][] = @array_merge(iteminfo2($row, 0), $drop);
 		}
 		unset($rows);
 		unset($lootid);
@@ -549,7 +553,7 @@ if(!$item = load_cache(ITEM_PAGE, $cache_key))
 				',
 				$row['spellID']
 			);
-			$item['createdfrom'][] = spellinfo2(array_merge($row, $skillrow));
+			$item['createdfrom'][] = spellinfo2(@array_merge($row, $skillrow));
 		}
 		unset($skillrow);
 	}
@@ -575,7 +579,7 @@ if(!$item = load_cache(ITEM_PAGE, $cache_key))
 			);
 			if($row)
 			{
-				$item['fishedin'][] = array_merge($row, $drop);
+				$item['fishedin'][] = @array_merge($row, $drop);
 			}
 			else
 			{
@@ -590,7 +594,7 @@ if(!$item = load_cache(ITEM_PAGE, $cache_key))
 					$lootid
 				);
 				if($row)
-					$item['fishedin'][] = array_merge($row, $drop);
+					$item['fishedin'][] = @array_merge($row, $drop);
 			}
 		}
 		unset($row);
@@ -626,7 +630,7 @@ if(!$item = load_cache(ITEM_PAGE, $cache_key))
 				$lootid
 			);
 			foreach($rows as $row)
-				$item['milledfrom'][] = array_merge(iteminfo2($row, 0), $drop);
+				$item['milledfrom'][] = @array_merge(iteminfo2($row, 0), $drop);
 		}
 		unset($rows);
 		unset($lootid);
@@ -734,7 +738,7 @@ $smarty->assign('page', $page);
 // Комментарии
 $smarty->assign('comments', getcomments($page['type'], $page['typeid']));
 $smarty->assign('screenshots', getscreenshots($page['type'], $page['typeid']));
-if($_GET['error']==2){
+if(@$_GET['error']==2){
 $smarty->assign('screenshot_error', $smarty->get_config_vars('Error2'));
 };
 // Количество MySQL запросов
